@@ -10,7 +10,7 @@ services:
           - "9081:8080"
         networks:
           - a11y-net
-          - cloudflare
+          - Cloudflare
 
 # Add load balances here
 # Axe CLI Endpoint
@@ -80,5 +80,5 @@ services:
 
 networks:
   a11y-net:
-  cloudflare:
+  Cloudflare:
     external: true
