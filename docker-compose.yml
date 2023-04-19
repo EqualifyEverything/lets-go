@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+    nginx:
+        image: nginx:latest
+        volumes:
+          - ./nginx.conf:/etc/nginx/nginx.conf:ro
+        ports:
+          - "8500:80"
+          - "8080:8080"
+        networks:
+          - a11y-net
+          - cloudflare
+
+# Add load balances here
+# Axe CLI Endpoint
+    scan-axe-1:
+      image: equalifyapp/integration-axe:latest
+      environment:
+        APP_PORT: 8086
+        http_proxy: http://proxy-1:8888
+        https_proxy: http://proxy-1:8888
+        FLASK_APP: axe.py
+      networks:
+        - a11y-net
+
+    scan-axe-2:
+      image: equalifyapp/integration-axe:latest
+      environment:
+        APP_PORT: 8086
+        http_proxy: http://proxy-1:8888
+        https_proxy: http://proxy-1:8888
+        FLASK_APP: axe.py
+      networks:
+        - a11y-net
+
+    scan-axe-3:
+      image: equalifyapp/integration-axe:latest
+      environment:
+        APP_PORT: 8086
+        http_proxy: http://proxy-1:8888
+        https_proxy: http://proxy-1:8888
+        FLASK_APP: axe.py
+      networks:
+        - a11y-net
+
+    scan-axe-4:
+      image: equalifyapp/integration-axe:latest
+      environment:
+        APP_PORT: 8086
+        http_proxy: http://proxy-1:8888
+        https_proxy: http://proxy-1:8888
+        FLASK_APP: axe.py
+      networks:
+        - a11y-net
+
+    scan-axe-5:
+      image: equalifyapp/integration-axe:latest
+      environment:
+        APP_PORT: 8086
+        http_proxy: http://proxy-1:8888
+        https_proxy: http://proxy-1:8888
+        FLASK_APP: axe.py
+      networks:
+        - a11y-net
+
+# Axe CLI Endpoint
+    scan-uppies-1:
+        image: equalifyapp/integration-axe:latest
+        environment:
+            APP_PORT: 8086
+            http_proxy: http://proxy-1:8888
+            https_proxy: http://proxy-1:8888
+            FLASK_APP: axe.py
+        networks:
+            - a11y-net
+
+
+# Tech Check Endpoint
+# TODO need to finish building this...
+    scan-tech-1:
+        image: ghcr.io/hunter-io/wappalyzer-api:3.6
+        networks:
+          - a11y-net
+
+    scan-tech-2:
+        image: ghcr.io/hunter-io/wappalyzer-api:3.6
+        networks:
+          - a11y-net
+
+
+# GlueTun Proxy
+# Adding single instance, but can add multiple
+    proxy-1:
+        image: qmcgaw/gluetun:latest
+        environment:
+            VPN_SERVICE_PROVIDER: mullvad
+            WIREGUARD_PRIVATE_KEY: ${WIREGUARD_PRIVATE_KEY}
+            WIREGUARD_ADDRESSES: 10.65.90.112/32
+            SERVER_COUNTRIES: USA   # Countries you want to use
+            VPN_TYPE: wireguard
+            HTTPPROXY: on
+            HTTPPROXY_LOG: on
+            HTTPPROXY_LISTENING_ADDRESS: :8888
+            LOG_LEVEL: debug    # Log Level
+            HEALTH_SERVER_ADDRESS: 127.0.0.1:9999
+            HEALTH_TARGET_ADDRESS: cloudflare.com:443
+            DOT_PROVIDERS: cloudflare # DNS Providers
+            HTTPPROXY_USER:     # Set Proxy Username - TODO
+            HTTPPROXY_PASSWORD: # Set Proxy Password - TODO
+            HTTP_CONTROL_SERVER_ADDRESS: :8000  # Where to send API Requests
+            TZ: america/new_york    # Timezone
+        networks:
+            - a11y-net
+
+
+networks:
+  a11y-net:
+  cloudflare:
+    external: true
