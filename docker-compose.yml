@@ -18,8 +18,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: http://localhost:18888
-        https_proxy: http://localhost:18888
+        http_proxy: https://hidey.gova11y.io
+        https_proxy: https://hidey.gova11y.io
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -28,8 +28,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: http://localhost:18888
-        https_proxy: http://localhost:18888
+        http_proxy: https://hidey.gova11y.io
+        https_proxy: https://hidey.gova11y.io
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -38,8 +38,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: http://localhost:18888
-        https_proxy: http://localhost:18888
+        http_proxy: https://hidey.gova11y.io
+        https_proxy: https://hidey.gova11y.io
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -48,8 +48,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: http://localhost:18888
-        https_proxy: http://localhost:18888
+        http_proxy: https://hidey.gova11y.io
+        https_proxy: https://hidey.gova11y.io
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -58,8 +58,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: http://localhost:18888
-        https_proxy: http://localhost:18888
+        http_proxy: https://hidey.gova11y.io
+        https_proxy: https://hidey.gova11y.io
         FLASK_APP: axe.py
       networks:
         - a11y-net
