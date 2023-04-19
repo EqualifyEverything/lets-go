@@ -7,7 +7,7 @@ services:
           - ./nginx.conf:/etc/nginx/nginx.conf:ro
         ports:
           - "8500:80"
-          - "8080:8080"
+          - "8081:8080"
         networks:
           - a11y-net
           - cloudflare
