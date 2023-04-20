@@ -73,6 +73,8 @@ services:
             http_proxy: https://hidey.gova11y.io
             https_proxy: https://hidey.gova11y.io
             LOG_LEVEL: INFO
+        networks:
+        - a11y-net
 
     scan-uppies-2:
         image: equalifyapp/integration-uppies:latest
@@ -81,6 +83,8 @@ services:
             http_proxy: https://hidey.gova11y.io
             https_proxy: https://hidey.gova11y.io
             LOG_LEVEL: INFO
+        networks:
+        - a11y-net
 
     scan-uppies-3:
         image: equalifyapp/integration-uppies:latest
@@ -89,6 +93,8 @@ services:
             http_proxy: https://hidey.gova11y.io
             https_proxy: https://hidey.gova11y.io
             LOG_LEVEL: INFO
+        networks:
+        - a11y-net
 
     scan-uppies-4:
         image: equalifyapp/integration-uppies:latest
@@ -97,6 +103,8 @@ services:
             http_proxy: https://hidey.gova11y.io
             https_proxy: https://hidey.gova11y.io
             LOG_LEVEL: INFO
+        networks:
+        - a11y-net
 
     scan-uppies-5:
         image: equalifyapp/integration-uppies:latest
@@ -105,6 +113,8 @@ services:
             http_proxy: https://hidey.gova11y.io
             https_proxy: https://hidey.gova11y.io
             LOG_LEVEL: INFO
+        networks:
+            - a11y-net
 
 # Tech Check Endpoint
 # TODO need to finish building this...
