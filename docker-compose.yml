@@ -75,11 +75,7 @@ services:
             LOG_LEVEL: INFO
         networks:
         - a11y-net
-        healthcheck:
-          test: curl --fail http://0.0.0.0:8085/health || exit 1
-          interval: 30s
-          timeout: 10s
-          retries: 3
+
 
     scan-uppies-2:
         image: equalifyapp/integration-uppies:latest
@@ -90,11 +86,7 @@ services:
             LOG_LEVEL: INFO
         networks:
         - a11y-net
-        healthcheck:
-          test: curl --fail http://127.0.0.1:8085/health || exit 1
-          interval: 30s
-          timeout: 10s
-          retries: 3
+
 
     scan-uppies-3:
         image: equalifyapp/integration-uppies:latest
@@ -105,11 +97,7 @@ services:
             LOG_LEVEL: INFO
         networks:
         - a11y-net
-        healthcheck:
-          test: curl --fail http://127.0.0.1:8085/health || exit 1
-          interval: 30s
-          timeout: 10s
-          retries: 3
+
 
     scan-uppies-4:
         image: equalifyapp/integration-uppies:latest
@@ -120,11 +108,7 @@ services:
             LOG_LEVEL: INFO
         networks:
         - a11y-net
-        healthcheck:
-          test: curl --fail http://127.0.0.1:8085/health || exit 1
-          interval: 30s
-          timeout: 10s
-          retries: 3
+
 
     scan-uppies-5:
         image: equalifyapp/integration-uppies:latest
@@ -135,11 +119,7 @@ services:
             LOG_LEVEL: INFO
         networks:
             - a11y-net
-        healthcheck:
-          test: curl --fail http://localhost:8085/health || exit 1
-          interval: 30s
-          timeout: 10s
-          retries: 3
+
 
 # Tech Check Endpoint
 # TODO need to finish building this...
