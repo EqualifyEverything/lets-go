@@ -138,6 +138,8 @@ services:
 
     matrix:
         image: equalifyapp/a11ymatrix:latest
+        ports:
+            - "8887:8887"
         environment:
             APP_PORT: 8887
             FRANKLIN_URL: http_URL_HERE
