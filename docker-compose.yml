@@ -133,6 +133,16 @@ services:
         networks:
           - a11y-net
 
+# Matrix
+# Not Managed by Nginx
+
+    matrix:
+        image: equalifyapp/a11ymatrix:latest
+        environment:
+            APP_PORT: 8887
+            FRANKLIN_URL: http_URL_HERE
+        networks:
+            - Cloudflare
 
 networks:
   a11y-net:
