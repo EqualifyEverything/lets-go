@@ -18,8 +18,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: https://hidey.gova11y.io
-        https_proxy: https://hidey.gova11y.io
+        http_proxy:
+        https_proxy:
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -28,8 +28,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: https://hidey.gova11y.io
-        https_proxy: https://hidey.gova11y.io
+        http_proxy:
+        https_proxy:
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -38,8 +38,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: https://hidey.gova11y.io
-        https_proxy: https://hidey.gova11y.io
+        http_proxy:
+        https_proxy:
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -48,8 +48,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: https://hidey.gova11y.io
-        https_proxy: https://hidey.gova11y.io
+        http_proxy:
+        https_proxy:
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -58,8 +58,8 @@ services:
       image: equalifyapp/integration-axe:latest
       environment:
         APP_PORT: 8086
-        http_proxy: https://hidey.gova11y.io
-        https_proxy: https://hidey.gova11y.io
+        http_proxy:
+        https_proxy:
         FLASK_APP: axe.py
       networks:
         - a11y-net
@@ -70,8 +70,8 @@ services:
         image: equalifyapp/integration-uppies:latest
         environment:
             APP_PORT: 8085
-            http_proxy: https://hidey.gova11y.io
-            https_proxy: https://hidey.gova11y.io
+            http_proxy:
+            https_proxy:
             LOG_LEVEL: INFO
         networks:
         - a11y-net
@@ -81,8 +81,8 @@ services:
         image: equalifyapp/integration-uppies:latest
         environment:
             APP_PORT: 8085
-            http_proxy: https://hidey.gova11y.io
-            https_proxy: https://hidey.gova11y.io
+            http_proxy:
+            https_proxy:
             LOG_LEVEL: INFO
         networks:
         - a11y-net
@@ -104,7 +104,7 @@ services:
         environment:
             APP_PORT: 8085
             http_proxy:
-            https_proxy: https://hidey.gova11y.io
+            https_proxy:
             LOG_LEVEL: INFO
         networks:
         - a11y-net
