@@ -3,6 +3,11 @@ version: '3.8'
 services:
     matrix:
         image: equalifyapp/a11ymatrix:latest
+        environment:
+            - APP_PORT=8087
+            - http_proxy
+            - https_proxy
+            - FRANKLIN_URL
         ports:
           - "8500:80"
           - "8081:8080"
@@ -13,7 +18,7 @@ services:
     scan-axe:
         image: equalifyapp/integration-axe:rabbit-latest
         environment:
-            - APP_PORT: 8083
+            - APP_PORT=8083
             - RABBIT_USERNAME
             - RABBIT_PASSWORD
             - RABBIT_HOST
