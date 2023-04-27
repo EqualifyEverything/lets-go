@@ -11,8 +11,8 @@ services:
             - RABBIT_HOST
             - RABBIT_VHOST
             - USE_PROXY
-            - PROXY_HTTP=gluetun:8888
-            - PROXY_HTTPS=gluetun:8888
+            - PROXY_HTTP
+            - PROXY_HTTPS
             - LOG_LEVEL
         networks:
             - gova11y-int
