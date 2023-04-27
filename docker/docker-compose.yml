@@ -26,7 +26,7 @@ services:
     # Proxy Server
     # Repo: https://github.com/qdm12/gluetun
     gluetun:
-        image: qmcgaw/gluetun:latest
+        image: qmcgaw/gluetun
         ports:
             - "8388:8388/tcp"   # Shadowsocks Proxy
             - "8388:8388/udp"   # Shadowsocks Proxy
@@ -75,10 +75,6 @@ networks:
     gova11y-int:
     gova11y-api:
         driver: bridge
-        driver_opts:
-          com.docker.network.enable_ipv6: "true"
-          com.docker.network.bridge.enable_ip_masquerade: "true"
-          com.docker.network.bridge.host_binding_ipv4: "0.0.0.0"
         ipam:
           driver: default
           config:
