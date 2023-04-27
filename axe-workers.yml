@@ -13,14 +13,14 @@ services:
     scan-axe:
         image: equalifyapp/integration-axe:rabbit-latest
         environment:
-            APP_PORT: 8083
-            RABBIT_USERNAME:
-            RABBIT_PASSWORD:
-            RABBIT_HOST:
-            RABBIT_VHOST:
-            USE_PROXY:
-            PROXY_HTTP:
-            PROXY_HTTPS:
+            - APP_PORT: 8083
+            - RABBIT_USERNAME
+            - RABBIT_PASSWORD
+            - RABBIT_HOST
+            - RABBIT_VHOST
+            - USE_PROXY
+            - PROXY_HTTP
+            - PROXY_HTTPS
         networks:
             - gova11y-net
         healthcheck:
