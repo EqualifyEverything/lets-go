@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+    matrix:
+        image: equalifyapp/a11ymatrix:latest
+        ports:
+          - "8500:80"
+          - "8081:8080"
+        networks:
+        - gova11y-net
+        - cf
+
+    scan-axe:
+        image: equalifyapp/integration-axe:rabbit-latest
+        environment:
+            APP_PORT: 8083
+            RABBIT_USERNAME:
+            RABBIT_PASSWORD:
+            RABBIT_HOST:
+            RABBIT_VHOST:
+            USE_PROXY:
+            PROXY_HTTP:
+            PROXY_HTTPS:
+        networks:
+        - gova11y-net
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8083/health"]
+            interval: 5m
+            timeout: 3s
+        deploy:
+            replicas: 5
+
+
+networks:
+    gova11y-net:
+    gova11y-ext:
+        external: true
