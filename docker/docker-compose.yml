@@ -25,7 +25,7 @@ services:
     # Proxy Server
     # Repo: https://github.com/qdm12/gluetun
     gluetun:
-        image: qmcgaw/gluetun:latest
+        image: qmcgaw/gluetun
         ports:
             - "8388:8388/tcp"   # Shadowsocks Proxy
             - "8388:8388/udp"   # Shadowsocks Proxy
