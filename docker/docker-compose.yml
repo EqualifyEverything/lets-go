@@ -16,70 +16,23 @@ services:
             - LOG_LEVEL
         networks:
             - gova11y-int
-        depends_on:
-            - gluetun
+      #  depends_on:
+        #    - gluetun
         deploy:
             replicas: 5
             restart_policy:
                 condition: on-failure
 
-    # Proxy Server
-    # Repo: https://github.com/qdm12/gluetun
-    gluetun:
-        image: qmcgaw/gluetun
-        ports:
-            - "18388:8388/tcp"   # Shadowsocks Proxy
-            - "18388:8388/udp"   # Shadowsocks Proxy
-            - "18888:8888/tcp"   # HTTP Proxy
-            - "18888:8888/udp"   # HTTP Proxy
-            - "18000:8000/tcp"   # API
-            - "19999:9999/tcp"   # Healthcheck
-        cap_add:
-            - NET_ADMIN
-        environment:
-            - VPN_SERVICE_PROVIDER
-            - VPN_TYPE=wireguard
-            - WIREGUARD_PRIVATE_KEY
-            - WIREGUARD_ADDRESSES
-            - SERVER_COUNTRIES=USA
-            # Shadowsocks Options: https://github.com/qdm12/gluetun/wiki/Shadowsocks-options
-            - SHADOWSOCKS=on
-            - SHADOWSOCKS_LOG=on
-            - SHADOWSOCKS_ADDRESS=:8388
-            - SHADOWSOCKS_PASSWORD
-            - SHADOWSOCKS_CIPHER
-            # HTTP Proxy: https://github.com/qdm12/gluetun/wiki/HTTP-proxy-options
-            - HTTPPROXY=on
-            - HTTPPROXY_LOG=on
-            - HTTPPROXY_LISTENING_ADDRESS=:8888
-            # DNS: https://github.com/qdm12/gluetun/wiki/DNS-options
-         #   - DNS_ADDRESS=192.168.1.56
-            - DOT_PRIVATE_ADDRESS=172.172.172.172
-            - BLOCK_MALICIOUS=off
-            - DOT_CACHING=on
-            - DOT=on
-            # Other Options: https://github.com/qdm12/gluetun/wiki/Other-options
-            - TZ=AMERICA/NEW_YORK
-            # Firewall: https://github.com/qdm12/gluetun/wiki/Firewall-options
-            - FIREWALL_DEBUG=on
-        networks:
-            - gova11y-int
-            - gova11y-api
-        deploy:
-            restart_policy:
-                condition: on-failure
-
-
 
 networks:
     gova11y-int:
-    gova11y-api:
-        driver: bridge
-        ipam:
-          driver: default
-          config:
-            - subnet: 172.18.0.0/16
-              gateway: 172.18.0.1
-              ip_range: 172.18.1.0/24
-        external:
-          name: gova11y-api
+#    gova11y-api:
+#        driver: bridge
+#        ipam:
+#          driver: default
+#          config:
+#            - subnet: 172.18.0.0/16
+#              gateway: 172.18.0.1
+#              ip_range: 172.18.1.0/24
+#        external:
+#          name: gova11y-api
