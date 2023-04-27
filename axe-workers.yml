@@ -14,7 +14,7 @@ services:
           - "8087:8087"
         networks:
             - gova11y-net
-            - gov-a11y-ext
+            - gova11y-ext
 
     scan-axe:
         image: equalifyapp/integration-axe:rabbit-latest
