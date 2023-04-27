@@ -28,12 +28,12 @@ services:
     gluetun:
         image: qmcgaw/gluetun
         ports:
-            - "8388:8388/tcp"   # Shadowsocks Proxy
-            - "8388:8388/udp"   # Shadowsocks Proxy
-            - "8888:8888/tcp"   # HTTP Proxy
-            - "8888:8888/udp"   # HTTP Proxy
-            - "8000:8000/tcp"   # API
-            - "9999:9999/tcp"   # Healthcheck
+            - "18388:8388/tcp"   # Shadowsocks Proxy
+            - "18388:8388/udp"   # Shadowsocks Proxy
+            - "18888:8888/tcp"   # HTTP Proxy
+            - "18888:8888/udp"   # HTTP Proxy
+            - "18000:8000/tcp"   # API
+            - "19999:9999/tcp"   # Healthcheck
         cap_add:
             - NET_ADMIN
         environment:
