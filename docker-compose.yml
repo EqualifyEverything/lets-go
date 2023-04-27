@@ -1,152 +1,43 @@
 version: '3.8'
 
 services:
-    nginx:
-        image: nginx:latest
-        volumes:
-          - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    matrix:
+        image: equalifyapp/a11ymatrix:latest
+        environment:
+            - APP_PORT=8087
+            - http_proxy
+            - https_proxy
+            - FRANKLIN_URL
         ports:
           - "8500:80"
           - "8081:8080"
+          - "8087:8087"
         networks:
-          - a11y-net
-          - Cloudflare
+            - gova11y-net
+            - gova11y-ext
 
-# Add load balances here
-# Axe CLI Endpoint
-    scan-axe-1:
-      image: equalifyapp/integration-axe:latest
-      environment:
-        APP_PORT: 8086
-        http_proxy:
-        https_proxy:
-        FLASK_APP: axe.py
-      networks:
-        - a11y-net
-
-    scan-axe-2:
-      image: equalifyapp/integration-axe:latest
-      environment:
-        APP_PORT: 8086
-        http_proxy:
-        https_proxy:
-        FLASK_APP: axe.py
-      networks:
-        - a11y-net
-
-    scan-axe-3:
-      image: equalifyapp/integration-axe:latest
-      environment:
-        APP_PORT: 8086
-        http_proxy:
-        https_proxy:
-        FLASK_APP: axe.py
-      networks:
-        - a11y-net
-
-    scan-axe-4:
-      image: equalifyapp/integration-axe:latest
-      environment:
-        APP_PORT: 8086
-        http_proxy:
-        https_proxy:
-        FLASK_APP: axe.py
-      networks:
-        - a11y-net
-
-    scan-axe-5:
-      image: equalifyapp/integration-axe:latest
-      environment:
-        APP_PORT: 8086
-        http_proxy:
-        https_proxy:
-        FLASK_APP: axe.py
-      networks:
-        - a11y-net
-
-# Uppies Endpoint
-
-    scan-uppies-1:
-        image: equalifyapp/integration-uppies:latest
+    scan-axe:
+        image: equalifyapp/integration-axe:latest
         environment:
-            APP_PORT: 8085
-            http_proxy:
-            https_proxy:
-            LOG_LEVEL: INFO
+            - APP_PORT=8083
+            - RABBIT_USERNAME
+            - RABBIT_PASSWORD
+            - RABBIT_HOST
+            - RABBIT_VHOST
+            - USE_PROXY
+            - PROXY_HTTP
+            - PROXY_HTTPS
         networks:
-        - a11y-net
+            - gova11y-net
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8083/health"]
+            interval: 5m
+            timeout: 3s
+        deploy:
+            replicas: 5
 
 
-    scan-uppies-2:
-        image: equalifyapp/integration-uppies:latest
-        environment:
-            APP_PORT: 8085
-            http_proxy:
-            https_proxy:
-            LOG_LEVEL: INFO
-        networks:
-        - a11y-net
-
-
-    scan-uppies-3:
-        image: equalifyapp/integration-uppies:latest
-        environment:
-            APP_PORT: 8085
-            http_proxy:
-            https_proxy:
-            LOG_LEVEL: INFO
-        networks:
-        - a11y-net
-
-
-    scan-uppies-4:
-        image: equalifyapp/integration-uppies:latest
-        environment:
-            APP_PORT: 8085
-            http_proxy:
-            https_proxy:
-            LOG_LEVEL: INFO
-        networks:
-        - a11y-net
-
-
-    scan-uppies-5:
-        image: equalifyapp/integration-uppies:latest
-        environment:
-            APP_PORT: 8085
-            http_proxy:
-            https_proxy:
-            LOG_LEVEL: INFO
-        networks:
-            - a11y-net
-
-
-# Tech Check Endpoint
-# TODO need to finish building this...
-    scan-tech-1:
-        image: ghcr.io/hunter-io/wappalyzer-api:3.6
-        networks:
-          - a11y-net
-
-    scan-tech-2:
-        image: ghcr.io/hunter-io/wappalyzer-api:3.6
-        networks:
-          - a11y-net
-
-# Matrix
-# Not Managed by Nginx
-
-    matrix:
-        image: equalifyapp/a11ymatrix:latest
-        ports:
-            - "8887:8887"
-        environment:
-            APP_PORT: 8887
-            FRANKLIN_URL:
-        networks:
-            - Cloudflare
 
 networks:
-  a11y-net:
-  Cloudflare:
-    external: true
+    gova11y-int:
+    gova11y-ext:
