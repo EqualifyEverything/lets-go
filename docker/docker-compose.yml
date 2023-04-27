@@ -20,12 +20,13 @@ services:
             - gluetun
         deploy:
             replicas: 5
-        restart: unless-stopped
+            restart_policy:
+                condition: on-failure
 
     # Proxy Server
     # Repo: https://github.com/qdm12/gluetun
     gluetun:
-        image: qmcgaw/gluetun
+        image: qmcgaw/gluetun:latest
         ports:
             - "8388:8388/tcp"   # Shadowsocks Proxy
             - "8388:8388/udp"   # Shadowsocks Proxy
@@ -64,7 +65,9 @@ services:
         networks:
             - gova11y-int
             - gova11y-api
-        restart: unless-stopped
+        deploy:
+            restart_policy:
+                condition: on-failure
 
 
 
