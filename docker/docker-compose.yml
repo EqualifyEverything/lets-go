@@ -23,16 +23,47 @@ services:
             restart_policy:
                 condition: on-failure
 
+    scan-uppies:
+        image: equalifyapp/integration-uppies:latest
+        environment:
+            - APP_PORT=8083
+            - RABBIT_USERNAME
+            - RABBIT_PASSWORD
+            - RABBIT_HOST
+            - RABBIT_VHOST
+            - USE_PROXY
+            - PROXY_HTTP
+            - PROXY_HTTPS
+            - LOG_LEVEL
+        networks:
+            - gova11y-int
+      #  depends_on:
+        #    - gluetun
+        deploy:
+            replicas: 5
+            restart_policy:
+                condition: on-failure
+
+
+    cloudflared:
+        image: cloudflare/cloudflared:latest
+        environment:
+            TUNNEL_AUTH_TOKEN:
+        networks:
+            - gova11y-ext
+
+   # a11ytheus:
+    #    image: equalifyapp/
 
 networks:
     gova11y-int:
-#    gova11y-api:
-#        driver: bridge
-#        ipam:
-#          driver: default
-#          config:
-#            - subnet: 172.18.0.0/16
-#              gateway: 172.18.0.1
-#              ip_range: 172.18.1.0/24
-#        external:
-#          name: gova11y-api
+    gova11y-ext:
+        driver: bridge
+        ipam:
+          driver: default
+          config:
+            - subnet: 172.18.0.0/16
+              gateway: 172.18.0.1
+              ip_range: 172.18.1.0/24
+        external:
+          name: gova11y-api
