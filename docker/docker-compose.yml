@@ -48,7 +48,7 @@ services:
     cloudflared:
         image: cloudflare/cloudflared:latest
         environment:
-            TUNNEL_AUTH_TOKEN:
+            - TUNNEL_AUTH_TOKEN
         networks:
             - gova11y-ext
 
