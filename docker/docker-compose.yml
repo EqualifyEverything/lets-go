@@ -44,13 +44,8 @@ services:
             restart_policy:
                 condition: on-failure
 
-
-    cloudflared:
-        image: cloudflare/cloudflared:latest
-        environment:
-            - TUNNEL_AUTH_TOKEN
-        networks:
-            - gova11y-ext
+  #  rabbit:
+   #     image: rabbitmq:3.11.14-management-alpine
 
    # a11ytheus:
     #    image: equalifyapp/
