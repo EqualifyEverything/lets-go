@@ -112,12 +112,6 @@ services:
             - "4369:4369/tcp"
             - "5672:5672/tcp"
             - "15672:15672/tcp"
-            - "15692:15692/tcp"
-<<<<<<< HEAD
-=======
-        volumes:
-            - rabbit:/var/lib/rabbitmq
->>>>>>> 2cf5bc4e3e0344cbf9e280da020960a814fd5bdf
         networks:
             - gova11y-int
         deploy:
@@ -129,10 +123,3 @@ services:
 networks:
     gova11y-int:
     gova11y-ext:
-        driver: bridge
-        ipam:
-          driver: default
-          config:
-            - subnet: 172.18.0.0/16
-              gateway: 172.18.0.1
-              ip_range: 172.18.1.0/24
