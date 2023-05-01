@@ -18,7 +18,6 @@ services:
             - gova11y-int
         depends_on:
             - rabbit
-            - nginx
         deploy:
             replicas: 5
             restart_policy:
@@ -40,7 +39,6 @@ services:
             - gova11y-int
         depends_on:
             - rabbit
-            - nginx
         deploy:
             replicas: 5
             restart_policy:
@@ -97,8 +95,6 @@ services:
         image: equalifyapp/nginx-proxy:latest
         ports:
             - "80:80"
-        depends_on:
-            - a11y-proxy
         networks:
             - gova11y-int
         deploy:
