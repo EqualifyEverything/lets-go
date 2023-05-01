@@ -49,7 +49,7 @@ services:
 # DNS & Proxy Load Balance
 
     a11y-proxy:
-        image: qmcgaw/gluetun
+        image: qmcgaw/gluetun:latest
         ports:
             - "8388:8388/tcp"   # Shadowsocks Proxy
             - "8388:8388/udp"   # Shadowsocks Proxy
