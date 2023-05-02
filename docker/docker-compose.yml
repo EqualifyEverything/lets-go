@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
 
+# Workers
     scan-axe:
         image: equalifyapp/integration-axe:latest
         environment:
@@ -45,7 +46,6 @@ services:
                 condition: on-failure
 
 # DNS & Proxy Load Balance
-
     a11y-proxy:
         image: qmcgaw/gluetun:latest
     #    ports:
@@ -101,7 +101,7 @@ services:
             replicas: 1
             restart_policy:
                 condition: on-failure
-
+# RabbitMQ Service
     rabbit:
         image: equalifyapp/a11y-rabbit:latest
         ports:
@@ -113,6 +113,20 @@ services:
         deploy:
           restart_policy:
               condition: on-failure
+
+# Matrix
+
+    matrix:
+        image: equalifyapp/a11ymatrix:latest
+        ports:
+            - "8087:8087/tcp"
+        networks:
+            - gova11y-int
+            - gova11y-ext
+        deploy:
+            restart_policy:
+                condition: on-failure
+
 
 
 
