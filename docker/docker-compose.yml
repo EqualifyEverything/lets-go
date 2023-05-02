@@ -46,7 +46,7 @@ services:
                 condition: on-failure
 
 # DNS & Proxy Load Balance
-    a11y-proxy:
+    a11yproxy:
         image: qmcgaw/gluetun:latest
     #    ports:
     #        - "8388:8388/tcp"   # Shadowsocks Proxy
@@ -94,7 +94,7 @@ services:
     nginx:
         image: equalifyapp/nginx-proxy:latest
         ports:
-            - "8888:8888"
+            - "8888:80"
         networks:
             - gova11y-int
         deploy:
