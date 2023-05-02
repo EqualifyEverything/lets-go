@@ -20,7 +20,7 @@ services:
         depends_on:
             - rabbit
         deploy:
-            replicas: 5
+            replicas: 3
             restart_policy:
                 condition: on-failure
 
@@ -41,7 +41,7 @@ services:
         depends_on:
             - rabbit
         deploy:
-            replicas: 5
+            replicas: 3
             restart_policy:
                 condition: on-failure
 
