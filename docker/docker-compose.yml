@@ -11,8 +11,8 @@ services:
             - RABBIT_HOST=rabbit
             - RABBIT_VHOST=gova11y
             - USE_PROXY=true
-            - PROXY_HTTP=a11y-proxy:8888
-            - PROXY_HTTPS=a11y-proxy:8888
+            - PROXY_HTTP=nginx:8888
+            - PROXY_HTTPS=nginx:8888
             - LOG_LEVEL
         networks:
             - gova11y-int
@@ -32,8 +32,8 @@ services:
             - RABBIT_HOST=rabbit
             - RABBIT_VHOST=gova11y
             - USE_PROXY=true
-            - PROXY_HTTP=a11y-proxy:8888
-            - PROXY_HTTPS=a11y-proxy:8888
+            - PROXY_HTTP=nginx:8888
+            - PROXY_HTTPS=nginx:8888
             - LOG_LEVEL
         networks:
             - gova11y-int
@@ -48,13 +48,13 @@ services:
 
     a11y-proxy:
         image: qmcgaw/gluetun:latest
-        ports:
-            - "8388:8388/tcp"   # Shadowsocks Proxy
-            - "8388:8388/udp"   # Shadowsocks Proxy
-            - "8888:8888/tcp"   # HTTP Proxy
-            - "8888:8888/udp"   # HTTP Proxy
-            - "8000:8000/tcp"   # API
-            - "9999:9999/tcp"   # Healthcheck
+    #    ports:
+    #        - "8388:8388/tcp"   # Shadowsocks Proxy
+    #        - "8388:8388/udp"   # Shadowsocks Proxy
+    #        - "8888:8888/tcp"   # HTTP Proxy
+    #        - "8888:8888/udp"   # HTTP Proxy
+    #        - "8000:8000/tcp"   # API
+    #        - "9999:9999/tcp"   # Healthcheck
         cap_add:
             - NET_ADMIN
         environment:
@@ -94,7 +94,7 @@ services:
     nginx:
         image: equalifyapp/nginx-proxy:latest
         ports:
-            - "80:80"
+            - "8888:8888"
         networks:
             - gova11y-int
         deploy:
