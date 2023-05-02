@@ -12,13 +12,14 @@ services:
             - RABBIT_HOST=rabbit
             - RABBIT_VHOST=gova11y
             - USE_PROXY=true
-            - PROXY_HTTP=a11yproxy:8888
-            - PROXY_HTTPS=a11yproxy:8888
+            - PROXY_HTTP=nginx:8888
+            - PROXY_HTTPS=nginx:8888
             - LOG_LEVEL
         networks:
             - gova11y-int
         depends_on:
             - rabbit
+            - a11yproxy
         deploy:
             replicas: 5
             restart_policy:
@@ -33,13 +34,14 @@ services:
             - RABBIT_HOST=rabbit
             - RABBIT_VHOST=gova11y
             - USE_PROXY=true
-            - PROXY_HTTP=a11yproxy:8888
-            - PROXY_HTTPS=a11yproxy:8888
+            - PROXY_HTTP=nginx:8888
+            - PROXY_HTTPS=nginx:8888
             - LOG_LEVEL
         networks:
             - gova11y-int
         depends_on:
             - rabbit
+            - a11yproxy
         deploy:
             replicas: 1
             restart_policy:
@@ -84,12 +86,12 @@ services:
             # Firewall: https://github.com/qdm12/gluetun/wiki/Firewall-options
             - FIREWALL_DEBUG=on
         deploy:
-            replicas: 1
+            replicas: 3
             restart_policy:
                 condition: on-failure
         networks:
             - gova11y-int
-            - gova11y-ext
+        #    - gova11y-ext
 
     nginx:
         image: equalifyapp/nginx-proxy:latest
@@ -123,6 +125,8 @@ services:
         networks:
             - gova11y-int
             - gova11y-ext
+        depends_on:
+            - rabbit
         deploy:
             restart_policy:
                 condition: on-failure
@@ -136,6 +140,8 @@ services:
         networks:
             - gova11y-int
             - gova11y-ext
+        depends_on:
+            - rabbit
         deploy:
             restart_policy:
                 condition: on-failure
