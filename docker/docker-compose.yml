@@ -94,7 +94,7 @@ services:
     nginx:
         image: equalifyapp/nginx-proxy:latest
         ports:
-            - "8888:888"
+            - "8888:8888"
         networks:
             - gova11y-int
         deploy:
@@ -127,7 +127,18 @@ services:
             restart_policy:
                 condition: on-failure
 
+# Rabbit Hole - Insert values to Postgres
 
+    rabbit-hole:
+        image: equalifyapp/rabbit-hole:latest
+        ports:
+            - "8084:8084"
+        networks:
+            - gova11y-int
+            - gova11y-ext
+        deploy:
+            restart_policy:
+                condition: on-failure
 
 
 networks:
