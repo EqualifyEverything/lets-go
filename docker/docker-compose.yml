@@ -19,9 +19,9 @@ services:
             - gova11y-int
         depends_on:
             - rabbit
-            - a11yproxy
+            - nginx
         deploy:
-            replicas: 5
+            replicas: 2
             restart_policy:
                 condition: on-failure
 
@@ -41,7 +41,7 @@ services:
             - gova11y-int
         depends_on:
             - rabbit
-            - a11yproxy
+            - nginx
         deploy:
             replicas: 1
             restart_policy:
