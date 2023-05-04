@@ -19,9 +19,9 @@ services:
             - gova11y-int
         depends_on:
             - rabbit
-            - nginx
+            - a11yproxy
         deploy:
-            replicas: 2
+            replicas: 1
             restart_policy:
                 condition: on-failure
 
@@ -41,7 +41,7 @@ services:
             - gova11y-int
         depends_on:
             - rabbit
-            - nginx
+            - a11yproxy
         deploy:
             replicas: 1
             restart_policy:
@@ -63,14 +63,14 @@ services:
               condition: on-failure
 
 # Matrix
-
+# TODO: ADD POSTGRES CONNECTION
     matrix:
         image: equalifyapp/a11ymatrix:latest
         ports:
             - "8087:8087/tcp"
         networks:
             - gova11y-int
-            - gova11y-ext
+            - gova11y-mid
         depends_on:
             - rabbit
         deploy:
@@ -78,21 +78,37 @@ services:
                 condition: on-failure
 
 # Rabbit Hole - Insert values to Postgres
-
+# TODO: ADD POSTGRES CONNECTION
     rabbit-hole:
         image: equalifyapp/rabbit-hole:latest
         ports:
             - "8084:8084"
         networks:
             - gova11y-int
-            - gova11y-ext
+            - gova11y-mid
         depends_on:
             - rabbit
         deploy:
             restart_policy:
                 condition: on-failure
 
+# Postgres
+    postgres:
+        image: equalifyapp/database:latest
+        environment:
+            - POSTGRES_DB=a11ydata
+            - POSTGRES_USER=a11ydata
+            - POSTGRES_PASSWORD=a11yAllTheThings!
+            - POSTGRES_PORT=5432
+        ports:
+            - "5432:5432"
+        networks:
+            - gova11y-mid
 
+# Grafana
+# TODO: Add AllyGrafana server here
+
+# Proxy Server
     a11yproxy:
         image: qmcgaw/gluetun:latest
         cap_add:
@@ -128,4 +144,4 @@ services:
 networks:
     gova11y-int:
     gova11y-ext:
-    gova11y-proxy:
+    gova11y-mid:
