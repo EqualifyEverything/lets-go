@@ -116,7 +116,7 @@ services:
             - "3000:3000"
         networks:
             - gova11y-mid
-            - gova11y_ext
+            - gova11y-ext
         depends_on:
             - postgres
         volumes:
