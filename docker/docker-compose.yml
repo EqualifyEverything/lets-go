@@ -21,7 +21,7 @@ services:
             - rabbit
             - a11yproxy
         deploy:
-            replicas: 1
+            replicas: 11
             restart_policy:
                 condition: on-failure
 
@@ -50,6 +50,7 @@ services:
 # RabbitMQ Service
     rabbit:
         image: equalifyapp/a11y-rabbit:latest
+        hostname: rabbit
         ports:
             - "4369:4369/tcp"
             - "5672:5672/tcp"
@@ -57,7 +58,7 @@ services:
         networks:
             - gova11y-int
         healthcheck:
-            test: ["CMD-SHELL", "rabbitmqctl wait -q -t 5 /var/lib/rabbitmq/mnesia/rabbit@localhost.pid"]
+            test: ["CMD-SHELL", "rabbitmqctl wait -q -t 5 /var/lib/rabbitmq/mnesia/rabbit@rabbit.pid"]
             interval: 10s
             timeout: 10s
             retries: 3
@@ -128,6 +129,7 @@ services:
 # Postgres
     postgres:
         image: equalifyapp/database:latest
+        hostname: postgres
         environment:
             - POSTGRES_DB=a11ydata
             - POSTGRES_USER=a11ydata
@@ -149,6 +151,7 @@ services:
 # Proxy Server
     a11yproxy:
         image: qmcgaw/gluetun:latest
+        hostname: a11yproxy
         cap_add:
             - NET_ADMIN
         environment:
