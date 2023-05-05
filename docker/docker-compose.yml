@@ -47,8 +47,6 @@ services:
             restart_policy:
                 condition: on-failure
 
-
-
 # RabbitMQ Service
     rabbit:
         image: equalifyapp/a11y-rabbit:latest
@@ -58,9 +56,14 @@ services:
             - "15672:15672/tcp"
         networks:
             - gova11y-int
+        healthcheck:
+            test: ["CMD-SHELL", "rabbitmqctl wait -q -t 5 /var/lib/rabbitmq/mnesia/rabbit@localhost.pid"]
+            interval: 10s
+            timeout: 10s
+            retries: 3
         deploy:
-          restart_policy:
-              condition: on-failure
+            restart_policy:
+                condition: on-failure
 
 # Matrix
     matrix:
@@ -79,8 +82,8 @@ services:
             - gova11y-int
             - gova11y-mid
         depends_on:
-            - rabbit
             - postgres
+            - rabbit
         deploy:
             restart_policy:
                 condition: on-failure
@@ -108,7 +111,6 @@ services:
             restart_policy:
                 condition: on-failure
 
-
 # Grafana
     a11yfana:
         image: equalifyapp/a11yfana:latest
@@ -119,7 +121,7 @@ services:
             - gova11y-ext
         depends_on:
             - postgres
-            - scan-axe
+        restart: always
         volumes:
             - a11yfana_data:/var/lib/grafana
 
@@ -137,6 +139,12 @@ services:
             - gova11y-mid
         volumes:
             - a11ygres_data:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U grafananalytics -d grafana"]
+            interval: 15s
+            timeout: 5s
+            retries: 3
+
 
 # Proxy Server
     a11yproxy:
