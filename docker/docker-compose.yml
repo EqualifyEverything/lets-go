@@ -119,6 +119,7 @@ services:
             - gova11y-ext
         depends_on:
             - postgres
+            - scan-axe
         volumes:
             - a11yfana_data:/var/lib/grafana
 
