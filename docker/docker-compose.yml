@@ -146,11 +146,11 @@ services:
             - HTTPPROXY_LOG=on
             - HTTPPROXY_LISTENING_ADDRESS=:8888
             # DNS: https://github.com/qdm12/gluetun/wiki/DNS-options
-            - DNS_ADDRESS=192.168.1.56
+            - DNS_ADDRESS=127.0.0.1
             - DOT_PRIVATE_ADDRESS=172.172.172.172
             - BLOCK_MALICIOUS=off
-            - DOT_CACHING=off
-            - DOT=off
+            - DOT_CACHING=on
+            - DOT=on
             # Other Options: https://github.com/qdm12/gluetun/wiki/Other-options
             - TZ=AMERICA/NEW_YORK
             # Firewall: https://github.com/qdm12/gluetun/wiki/Firewall-options
