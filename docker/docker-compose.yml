@@ -63,7 +63,6 @@ services:
               condition: on-failure
 
 # Matrix
-# TODO: ADD POSTGRES CONNECTION
     matrix:
         image: equalifyapp/a11ymatrix:latest
         environment:
@@ -87,7 +86,6 @@ services:
                 condition: on-failure
 
 # Rabbit Hole - Insert values to Postgres
-# TODO: ADD POSTGRES CONNECTION
     rabbit-hole:
         image: equalifyapp/rabbit-hole:latest
         environment:
@@ -128,7 +126,18 @@ services:
         # Mount as storage location: /var/lib/postgresql/data
 
 # Grafana
-# TODO: Add AllyGrafana server here
+    a11yfana:
+        image: equalifyapp/a11yfana:latest
+        ports:
+            - "3000:3000"
+        networks:
+            - gova11y-mid
+            - gova11y-export default
+        depends_on:
+            - postgres
+        volumes:
+            - a11yfana_data:/var/lib/grafana
+
 
 # Proxy Server
     a11yproxy:
@@ -165,8 +174,9 @@ services:
 
 networks:
     gova11y-int:
-    gova11y-ext:
     gova11y-mid:
+    gova11y-ext:
 
 volumes:
     a11ygres_data:
+    a11yfana_data:
