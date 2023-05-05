@@ -108,22 +108,6 @@ services:
             restart_policy:
                 condition: on-failure
 
-# Postgres
-    postgres:
-        image: equalifyapp/database:latest
-        environment:
-            - POSTGRES_DB=a11ydata
-            - POSTGRES_USER=a11ydata
-            - POSTGRES_PASSWORD=a11yAllTheThings!
-            - POSTGRES_PORT=5432
-        ports:
-            - "5432:5432"
-        networks:
-            - gova11y-mid
-        volumes:
-            - a11ygres_data:/var/lib/postgresql/data
-
-        # Mount as storage location: /var/lib/postgresql/data
 
 # Grafana
     a11yfana:
@@ -138,6 +122,20 @@ services:
         volumes:
             - a11yfana_data:/var/lib/grafana
 
+# Postgres
+    postgres:
+        image: equalifyapp/database:latest
+        environment:
+            - POSTGRES_DB=a11ydata
+            - POSTGRES_USER=a11ydata
+            - POSTGRES_PASSWORD=a11yAllTheThings!
+            - POSTGRES_PORT=5432
+        ports:
+            - "5432:5432"
+        networks:
+            - gova11y-mid
+        volumes:
+            - a11ygres_data:/var/lib/postgresql/data
 
 # Proxy Server
     a11yproxy:
