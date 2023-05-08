@@ -14,7 +14,7 @@ services:
             - USE_PROXY=true
             - PROXY_HTTP=a11yproxy:8888
             - PROXY_HTTPS=a11yproxy:8888
-            - LOG_LEVEL=debug
+            - LOG_LEVEL
         networks:
             - gova11y-int
         depends_on:
@@ -36,7 +36,7 @@ services:
             - USE_PROXY=true
             - PROXY_HTTP=a11yproxy:8888
             - PROXY_HTTPS=a11yproxy:8888
-            - LOG_LEVEL=debug
+            - LOG_LEVEL
         networks:
             - gova11y-int
         depends_on:
@@ -75,7 +75,7 @@ services:
             - DB_USER=a11ydata
             - DB_PASSWORD=a11yAllTheThings!
             - DB_NAME=a11ydata
-            - LOG_LEVEL=debug
+            - LOG_LEVEL
             - APP_PORT=8087
         ports:
             - "8087:8087/tcp"
@@ -98,7 +98,7 @@ services:
         - DB_USER=a11ydata
         - DB_PASSWORD=a11yAllTheThings!
         - DB_NAME=a11ydata
-        - LOG_LEVEL=debug
+        - LOG_LEVEL
         - APP_PORT=8084
         ports:
             - "8084:8084"
@@ -157,10 +157,7 @@ services:
         environment:
             - VPN_SERVICE_PROVIDER=mullvad
             - VPN_TYPE=wireguard
-            
-            # Add the Wireguard password and uncomment the line
-            # - WIREGUARD_PRIVATE_KEY=Password
-            
+            - WIREGUARD_PRIVATE_KEY
             - WIREGUARD_ADDRESSES=10.65.90.193/32
             - SERVER_COUNTRIES=USA
             # HTTP Proxy: https://github.com/qdm12/gluetun/wiki/HTTP-proxy-options
