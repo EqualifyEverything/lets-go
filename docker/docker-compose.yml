@@ -47,6 +47,25 @@ services:
             restart_policy:
                 condition: on-failure
 
+    crawler:
+        image: equalifyapp/integration-crawler:latest
+        environment:
+            - APP_PORT=8086
+            - USE_PROXY=true
+            - PROXY_HTTP=a11yproxy:8888
+            - PROXY_HTTPS=a11yproxy:8888
+            - LOG_LEVEL
+        networks:
+            - gova11y-int
+        depends_on:
+            - rabbit
+            - a11yproxy
+        deploy:
+            replicas: 1
+            restart_policy:
+                condition: on-failure
+
+
 # RabbitMQ Service
     rabbit:
         image: equalifyapp/a11y-rabbit:latest
