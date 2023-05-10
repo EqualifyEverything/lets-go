@@ -61,7 +61,7 @@ services:
             - rabbit
             - a11yproxy
         deploy:
-            replicas: 1
+            replicas: 5
             restart_policy:
                 condition: on-failure
 
